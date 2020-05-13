@@ -453,7 +453,7 @@ pub fn vrapi_DefaultPerformanceParms() -> ovrPerformanceParms {
 }
 
 // Utility function to default initialize the ovrFrameParms.
-pub fn vrapi_DefaultFrameParms(java: *const ovrJava,
+/*pub fn vrapi_DefaultFrameParms(java: *const ovrJava,
                                init: ovrFrameInit,
                                currentTime: f64,
                                textureSwapChain: *mut ovrTextureSwapChain)
@@ -541,7 +541,7 @@ pub fn vrapi_DefaultFrameParms(java: *const ovrJava,
     }
 
     return parms;
-}
+}*/
 
 //-----------------------------------------------------------------
 // Eye view matrix helper functions.
@@ -562,12 +562,12 @@ pub fn vrapi_GetInterpupillaryDistance(tracking2: &ovrTracking2) -> f32 {
 }
 
 pub fn vrapi_GetEyeHeight(eyeLevelTrackingPose: &ovrPosef, currentTrackingPose: &ovrPosef) -> f32 {
-	eyeLevelTrackingPose.Position.y - currentTrackingPose.Position.y
+	unsafe { eyeLevelTrackingPose.__bindgen_anon_1.Position.y - currentTrackingPose.__bindgen_anon_1.Position.y }
 }
 
 pub fn vrapi_GetTransformFromPose(pose: &ovrPosef) -> ovrMatrix4f {
 	let rotation = ovrMatrix4f_CreateFromQuaternion( &pose.Orientation );
-	let translation = ovrMatrix4f_CreateTranslation( pose.Position.x, pose.Position.y, pose.Position.z );
+	let translation = unsafe { ovrMatrix4f_CreateTranslation( pose.__bindgen_anon_1.Position.x, pose.__bindgen_anon_1.Position.y, pose.__bindgen_anon_1.Position.z ) };
 	return ovrMatrix4f_Multiply( &translation, &rotation );
 }
 
@@ -593,7 +593,7 @@ pub fn vrapi_GetEyeViewMatrix(
 // Layer Types - default initialization.
 //-----------------------------------------------------------------
 
-pub fn vrapi_DefaultLayerProjection2() -> ovrLayerProjection2 {
+/*pub fn vrapi_DefaultLayerProjection2() -> ovrLayerProjection2 {
 	let mut layer: ovrLayerProjection2 = unsafe { mem::zeroed() };
 
 	let projectionMatrix = ovrMatrix4f_CreateProjectionFov( 90.0, 90.0, 0.0, 0.0, 0.1, 0.0 );
@@ -620,8 +620,9 @@ pub fn vrapi_DefaultLayerProjection2() -> ovrLayerProjection2 {
 	}
 
 	layer
-}
+}*/
 
+/*
 pub fn vrapi_DefaultLayerLoadingIcon2() -> ovrLayerLoadingIcon2 {
 	let mut layer: ovrLayerLoadingIcon2 = unsafe { mem::zeroed() };
 
@@ -642,4 +643,4 @@ pub fn vrapi_DefaultLayerLoadingIcon2() -> ovrLayerLoadingIcon2 {
 	layer.SwapChainIndex	= 0;
 
 	return layer;
-}
+}*/
