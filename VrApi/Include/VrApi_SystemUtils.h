@@ -6,7 +6,7 @@ Created     :   August 15, 2014
 Authors     :   Gloria Kennickell, Jonathan E. Wright
 Language    :   C99
 
-Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
+Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
 
 *************************************************************************************/
 #ifndef OVR_VrApi_SystemUtils_h
@@ -19,9 +19,9 @@ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 extern "C" {
 #endif
 
-typedef enum
+typedef enum ovrSystemUIType_
 {
-	// enum  0 used to be VRAPI_SYS_UI_GLOBAL_MENU.
+	// enum 0 used to be VRAPI_SYS_UI_GLOBAL_MENU.
 
 	VRAPI_SYS_UI_CONFIRM_QUIT_MENU		= 1,	// Display the 'Confirm Quit' Menu.
 
@@ -30,20 +30,14 @@ typedef enum
 
 } ovrSystemUIType;
 
-// Display a specific System UI.
+/// Display a specific System UI.
 OVR_VRAPI_EXPORT bool vrapi_ShowSystemUI( const ovrJava * java, const ovrSystemUIType type );
 
-// ----DEPRECATED
-// This function is DEPRECATED. Please do not write any new code which
-// relies on it's use.
-// Display a specific System UI and pass extra JSON text data.
-OVR_VRAPI_EXPORT bool vrapi_ShowSystemUIWithExtra( const ovrJava * java, const ovrSystemUIType type, const char * extraJsonText );
+/// \deprecated Display a specific System UI and pass extra JSON text data.
+OVR_VRAPI_DEPRECATED( OVR_VRAPI_EXPORT bool vrapi_ShowSystemUIWithExtra( const ovrJava * java, const ovrSystemUIType type, const char * extraJsonText ) );
 
-// Launch the Oculus Home application.
-// NOTE: This exits the current application by executing a finishAffinity.
-OVR_VRAPI_EXPORT void vrapi_ReturnToHome( const ovrJava * java );
 
-// Display a Fatal Error Message using the System UI.
+/// Display a Fatal Error Message using the System UI.
 OVR_VRAPI_EXPORT void vrapi_ShowFatalError( const ovrJava * java, const char * title, const char * message,
 		const char * fileName, const unsigned int lineNumber );
 
